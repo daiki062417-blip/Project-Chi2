@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// プレイヤークラスを作ったら抽象クラスにする 
 public class Character : MonoBehaviour
 {
     // Start is called before the first frame update

@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class test_Main : MonoBehaviour
 {
+    
+    [SerializeField] SkillSlotManager slotManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        var status1 = StatusManager.CreateStatus(power:1);
-        var status2 = StatusManager.CreateStatus(power:2, defense:3);
-        var sum = StatusManager.SumStatus(status1, status2);
-        StatusManager.ShowStatus(sum);
+        slotManager.SetUp();
+        GetComponent<Player>().SetUp();
+
+        var skill = GetComponent<ISkill>();
+        slotManager.SetSkill(skill, SkillSlotManager.Button.b1);
+
+        GetComponent<Player>().ActivatedSkill(SkillSlotManager.Button.b1);
+
     }
 
     // Update is called once per frame
