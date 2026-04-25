@@ -874,6 +874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354707533}
   - component: {fileID: 1354707532}
+  - component: {fileID: 1354707534}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -888,12 +889,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354707531}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c51b1a4960e7aa4bac6d35d608c11b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2004630357}
+  playerDic:
+    m_list:
+    - Key: Kai
+      Value: {fileID: 1858958494}
+  item: {fileID: 11400000, guid: 18e220f6d166e3f4bbf1b039e44a332a, type: 2}
 --- !u!4 &1354707533
 Transform:
   m_ObjectHideFlags: 0
@@ -909,6 +915,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354707534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354707531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8b7c94c8815e24fb65c77e6cfba76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1789225646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,11 +1028,9 @@ GameObject:
   - component: {fileID: 1858958490}
   - component: {fileID: 1858958489}
   - component: {fileID: 1858958488}
-  - component: {fileID: 1858958495}
   - component: {fileID: 1858958494}
-  - component: {fileID: 1858958493}
   m_Layer: 0
-  m_Name: PlayerCube
+  m_Name: Kai
   m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1133,19 +1149,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1858958493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858958487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c51b1a4960e7aa4bac6d35d608c11b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotManager: {fileID: 2004630357}
 --- !u!114 &1858958494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1158,19 +1161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba82a210f026654e9404e2891a5bf47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Kai
   slotManager: {fileID: 2004630357}
---- !u!114 &1858958495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858958487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c60250d8661dd4b9f2427f8c179928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2004630355
 GameObject:
   m_ObjectHideFlags: 0

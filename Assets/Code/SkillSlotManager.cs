@@ -23,9 +23,7 @@ public class SkillSlotManager : MonoBehaviour
 
         for(int i = 0; i < (int)Button.buttonCount; i++)
         {
-            skillSlots.Add((Button)i, childrenList[i]);
-            Debug.Log("[SkillSlotManager] i : " + i);
-            
+            skillSlots.Add((Button)i, childrenList[i]);            
         }
 
     }
@@ -41,7 +39,7 @@ public class SkillSlotManager : MonoBehaviour
         var slot = skillSlots[button];
         slot.mySkill = skill;
 
-        Debug.Log("skill name : " + slot.mySkill.motionName);
+        Debug.Log("[SkillSlotManager] SetSkill name : " + slot.mySkill.motionName);
 
         // アイコンセット処理
             //ここにアイコンセット処理を記述

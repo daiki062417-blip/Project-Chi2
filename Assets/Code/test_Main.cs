@@ -6,23 +6,40 @@ public class test_Main : MonoBehaviour
 {
     
     [SerializeField] SkillSlotManager slotManager;
+    public SerializedDictionary<string, Player> playerDic = new();
+
 
     // Start is called before the first frame update
     void Start()
     {
+        // セットアップ
         slotManager.SetUp();
-        GetComponent<Player>().SetUp();
+       
+        // プレイアブルキャラの初期化
+        foreach(var p in playerDic.Values)
+        {
+            p.SetUp();
+        }
 
-        var skill = GetComponent<ISkill>();
-        slotManager.SetSkill(skill, SkillSlotManager.Button.b1);
-
-        GetComponent<Player>().ActivatedSkill(SkillSlotManager.Button.b1);
+        // デバッグ用
+        TestFunction();
 
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// デバッグ用関数。コンフリクトしたら、自分の編集で上書きしていいよ
+    /// </summary>
+    public Item item;
+
+    void TestFunction()
     {
-        
+        var inventory = GetComponent<Inventory>();
+
+        inventory.AddItem(item, 1);
+        inventory.AddItem(item, 1);
+
+        inventory.UseItem(item, playerDic["Kai"]);
+        inventory.UseItem(item, playerDic["Kai"]);
+
     }
 }

@@ -6,7 +6,7 @@ public class Player : Character
 {
     [SerializeField] SkillSlotManager slotManager;
     Player player;
-
+  
     public void SetUp()
     {
         player = GetComponent<Player>();
