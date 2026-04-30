@@ -4,18 +4,42 @@ using UnityEngine;
 
 public class test_Main : MonoBehaviour
 {
+    
+    [SerializeField] SkillSlotManager slotManager;
+    public SerializedDictionary<string, Player> playerDic = new();
+
+
     // Start is called before the first frame update
     void Start()
     {
-        var status1 = StatusManager.CreateStatus(power:1);
-        var status2 = StatusManager.CreateStatus(power:2, defense:3);
-        var sum = StatusManager.SumStatus(status1, status2);
-        StatusManager.ShowStatus(sum);
+        // セットアップ
+        slotManager.SetUp();
+       
+        // プレイアブルキャラの初期化
+        foreach(var p in playerDic.Values)
+        {
+            p.SetUp();
+        }
+
+        // デバッグ用
+        TestFunction();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// デバッグ用関数。コンフリクトしたら、自分の編集で上書きしていいよ
+    /// </summary>
+    public Item item;
+
+    void TestFunction()
     {
-        
+        var inventory = GetComponent<Inventory>();
+
+        inventory.AddItem(item, 1);
+        inventory.AddItem(item, 1);
+
+        inventory.UseItem(item, playerDic["Kai"]);
+        inventory.UseItem(item, playerDic["Kai"]);
+
     }
 }
