@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 49140746}
   - component: {fileID: 49140745}
   - component: {fileID: 49140744}
+  - component: {fileID: 49140748}
   m_Layer: 0
   m_Name: EnemyCube
   m_TagString: Enemy
@@ -332,6 +333,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &49140748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49140743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d809b70ad8bb6084d80af596f2e7a68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  ThisTransform: {fileID: 0}
 --- !u!1 &612628614
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,8 +958,6 @@ MonoBehaviour:
   Chi: {fileID: 612628614}
   Miu: {fileID: 1182705093}
   Virna: {fileID: 692507876}
-  current_chara: 0
-  players: []
 --- !u!1 &1858958487
 GameObject:
   m_ObjectHideFlags: 0
