@@ -13,7 +13,7 @@ public class test_Main : MonoBehaviour
     void Start()
     {
         // セットアップ
-        slotManager.SetUp();
+        //slotManager.SetUp();
        
         // プレイアブルキャラの初期化
         foreach(var p in playerDic.Values)
@@ -33,13 +33,5 @@ public class test_Main : MonoBehaviour
 
     void TestFunction()
     {
-        var inventory = GetComponent<Inventory>();
-
-        inventory.AddItem(item, 1);
-        inventory.AddItem(item, 1);
-
-        inventory.UseItem(item, playerDic["Kai"]);
-        inventory.UseItem(item, playerDic["Kai"]);
-
     }
 }

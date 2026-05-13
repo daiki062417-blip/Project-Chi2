@@ -971,6 +971,7 @@ GameObject:
   - component: {fileID: 1858958490}
   - component: {fileID: 1858958489}
   - component: {fileID: 1858958488}
+  - component: {fileID: 1858958493}
   m_Layer: 0
   m_Name: PlayerCube
   m_TagString: player

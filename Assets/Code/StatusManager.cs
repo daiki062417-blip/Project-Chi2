@@ -101,6 +101,7 @@ public class StatusManager : MonoBehaviour
         newStatus.speed = speed;
         newStatus.luck = luck;
         newStatus.element_defence = element_defence;
+        Debug.Log("‚¶‚Â‚ÍmaxSP‚ÍA" + maxSP);
 
         // ‘Š«”{—¦‚ª–¢İ’è‚È‚ç‰Šú‰»
         if (Equals(congenialityRate, new CongenialityRate()))
