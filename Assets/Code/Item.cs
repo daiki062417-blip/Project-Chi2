@@ -9,7 +9,7 @@ public class Item : ScriptableObject
     public int ID;
     public bool isConsumed;
 
-    public void Use(Player player)
+    public virtual void Use(Player player)
     {
         Debug.Log("[Item] use : " + ID);
     }
