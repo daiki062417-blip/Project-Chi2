@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 49140745}
   - component: {fileID: 49140744}
   - component: {fileID: 49140748}
+  - component: {fileID: 49140749}
   m_Layer: 0
   m_Name: EnemyCube
   m_TagString: Enemy
@@ -347,6 +348,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   ThisTransform: {fileID: 0}
+  Player: {fileID: 1354707534}
+--- !u!114 &49140749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49140743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6abf5184d9729468c83b0d31216fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotManager: {fileID: 2004630357}
 --- !u!1 &612628614
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +967,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1354707531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced04ca716bb29c498d540941fad19de, type: 3}
+  m_Script: {fileID: 11500000, guid: a3e05eb0c9aa86c43a491b904c57f526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Chi: {fileID: 612628614}
@@ -971,7 +986,6 @@ GameObject:
   - component: {fileID: 1858958490}
   - component: {fileID: 1858958489}
   - component: {fileID: 1858958488}
-  - component: {fileID: 1858958493}
   m_Layer: 0
   m_Name: PlayerCube
   m_TagString: player
@@ -1120,10 +1134,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 565522605}
-  - {fileID: 373663699}
-  - {fileID: 1789225647}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1156,3 +1167,4 @@ SceneRoots:
   - {fileID: 612628618}
   - {fileID: 1182705097}
   - {fileID: 692507880}
+  - {fileID: 2004630356}
