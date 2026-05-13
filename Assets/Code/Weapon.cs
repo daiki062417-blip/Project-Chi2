@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : Item
 {
-    // Start is called before the first frame update
-    void Start()
+
+    /// <summary>
+    /// 効果指定用の定数
+    /// </summary>
+    enum Effect
     {
-        
+        enhancePower,
+        enhanceCritical,
     }
 
-    // Update is called once per frame
-    void Update()
+    // 武器のステータス
+    [SerializeField] StatusManager.Status status;
+
+    // サブ効果の付与上限
+    [SerializeField] int effectLimit;
+
+
+    
+
+    public void AddSubEffect()
     {
-        
+
     }
+    
 }
