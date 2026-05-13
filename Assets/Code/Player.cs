@@ -11,6 +11,7 @@ public class Player : Character
     public StatusManager.Status status;
     bool almost;
   
+
     public void SetUp()
     {
         player = GetComponent<Player>();
@@ -37,6 +38,7 @@ public class Player : Character
             yield return new WaitForSeconds(3f);
         }
     }
+     }
 
     public void ActivatedSkill(SkillSlotManager.Button button)
     {

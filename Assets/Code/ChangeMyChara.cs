@@ -4,53 +4,63 @@ using UnityEngine;
 
 public class ChangeMyChara : MonoBehaviour
 {
-    //とりあえずシフトキーを押して交代する。キーの場所は要相談。
     //スペル分からない！
     public GameObject Chi;
     public GameObject Miu;
     public GameObject Virna;
 
     private int current_chara;
+    private int before_chara;
     private GameObject[] players;
+    //public Transform chara_transform;   //交代時に全キャラの座標情報
+
 
     void Start()
     {
+        //Chi = GameObject.Find("TempChi");
+        //Miu = GameObject.Find("TempMiu");
+        //Virna = GameObject.Find("TempVirna");
+
         players = new GameObject[] { Chi, Miu, Virna };
 
-        // 最初はplayer1だけ操作可能
+        // 最初はカイだけ操作可能
         current_chara = 0;
-        players[current_chara].SetActive(true);
+        before_chara = 2;
+        players[0].SetActive(true);
+        players[1].SetActive(false);
+        players[2].SetActive(false);
 
     }
     void Update()
-    {
+    {    
+        //とりあえずシフトキーを押して交代する。キーの場所は要相談。
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            //次のキャラをアクティブ化する
-            current_chara = (current_chara + 1) % players.Length;
-            SetActivePlayer(current_chara);
+            //交代前のキャラの座標情報を保存
+            //chara_transform = players[current_chara].transform;
 
-            //他キャラを非アクティブ化する。
-            for (int i = 0; i < players.Length; i++)
-            {
-                if (i != current_chara)
-                {
-                    players[i].SetActive(false);
-                }
-            }
+            //現在キャラを非アクティブ化する
+            players[current_chara].SetActive(false);
+
+            //次のキャラが何番目か、前キャラが何番目か
+            current_chara = (current_chara + 1) % players.Length;
+            before_chara = (before_chara + 1) % players.Length;
+
+            //前キャラの座標情報を現在キャラに代入
+            players[current_chara].transform.position = players[before_chara].transform.position;
+            players[current_chara].transform.rotation = players[before_chara].transform.rotation;
+            
+            //現在キャラをアクティブ化
+            players[current_chara].SetActive(true);
 
         }
     }
 
-    void SetActivePlayer(int index)
+    //現在の操作キャラが何かを返す関数
+    public GameObject Playable()
     {
-        //for (int i = 0; i < players.Length; i++)
-        //{
-        // PlayerControllerの有効/無効を切り替える(AI製)
-        //players[i].GetComponent<PlayerController>().enabled = (i == index);
-        //}
-
-        //控えのキャラはSetActiveで非表示にする
+        return players[current_chara];
     }
+
 
 }
