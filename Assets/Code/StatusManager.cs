@@ -8,6 +8,7 @@ public class StatusManager : MonoBehaviour
     /// <summary>
     /// 相手が食らう、相性によるダメージ倍率
     /// </summary>
+    [System.Serializable]
     public struct CongenialityRate
     {
         public float fire;
@@ -19,6 +20,7 @@ public class StatusManager : MonoBehaviour
     /// <summary>
     /// ステータス
     /// </summary>
+    [System.Serializable]
     public struct Status
     {
         public int HP;

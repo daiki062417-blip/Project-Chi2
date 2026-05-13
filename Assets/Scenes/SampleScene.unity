@@ -943,8 +943,7 @@ MonoBehaviour:
   Chi: {fileID: 612628614}
   Miu: {fileID: 1182705093}
   Virna: {fileID: 692507876}
-  current_chara: 0
-  players: []
+  chara_transform: {fileID: 0}
 --- !u!1 &1858958487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,10 +1105,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 565522605}
-  - {fileID: 373663699}
-  - {fileID: 1789225647}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1142,3 +1138,4 @@ SceneRoots:
   - {fileID: 612628618}
   - {fileID: 1182705097}
   - {fileID: 692507880}
+  - {fileID: 2004630356}
