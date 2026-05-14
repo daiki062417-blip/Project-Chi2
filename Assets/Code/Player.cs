@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    //[SerializeField] SkillSlotManager slotManager;
+    [SerializeField] SkillSlotManager slotManager;
     Player player;
     float sp = 0;
     [SerializeField]float spSpeed;
@@ -19,7 +19,7 @@ public class Player : Character
         status = StatusManager.CreateStatus(
             maxSP:8
         );
-        Debug.Log("maxSP‚Í" + status.maxSP);
+        Debug.Log("maxSPï¿½ï¿½" + status.maxSP);
     }
 
     private void Start()
@@ -43,20 +43,20 @@ public class Player : Character
     public void ActivatedSkill(SkillSlotManager.Button button)
     {
         ISkill skill = null;
-        
-        //skill = slotManager.GetSkill(button);
 
-        // ƒ‚[ƒVƒ‡ƒ“Às
+        skill = slotManager.GetSkill(button);
 
-        // ‹Z”­“®
-        //StartCoroutine(skill.SkillProcess(player));
+        // ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½s
+
+        // ï¿½Zï¿½ï¿½ï¿½ï¿½
+        StartCoroutine(skill.SkillProcess(player));
     }
     public void SpRestore()
     {
         if (sp < status.maxSP)
         {
             sp += spSpeed;
-            Debug.Log("Œ»İ‚Ìsp‚Í" + sp);
+            Debug.Log("ï¿½ï¿½ï¿½İ‚ï¿½spï¿½ï¿½" + sp);
             if (sp == status.maxSP)
             {
                 almost = true;
@@ -64,7 +64,7 @@ public class Player : Character
         }
         if(almost)
         {
-            Debug.Log("spãŒÀ‚É’B‚µ‚Ü‚µ‚½");
+            Debug.Log("spï¿½ï¿½ï¿½ï¿½É’Bï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
             almost = false;
         }
     }
