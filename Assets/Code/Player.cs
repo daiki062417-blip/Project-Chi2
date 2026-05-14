@@ -7,19 +7,19 @@ public class Player : Character
     [SerializeField] SkillSlotManager slotManager;
     Player player;
     float sp = 0;
-    [SerializeField]float spSpeed;
+    [SerializeField] float spSpeed;
     public StatusManager.Status status;
     bool almost;
-  
+
 
     public void SetUp()
     {
         player = GetComponent<Player>();
 
         status = StatusManager.CreateStatus(
-            maxSP:8
+            maxSP: 8
         );
-        Debug.Log("maxSP��" + status.maxSP);
+        Debug.Log("maxSPは" + status.maxSP);
     }
 
     private void Start()
@@ -38,7 +38,7 @@ public class Player : Character
             yield return new WaitForSeconds(3f);
         }
     }
-     }
+
 
     public void ActivatedSkill(SkillSlotManager.Button button)
     {
@@ -46,9 +46,9 @@ public class Player : Character
 
         skill = slotManager.GetSkill(button);
 
-        // ���[�V�������s
+        // モーション実行
 
-        // �Z����
+        // 技発動
         StartCoroutine(skill.SkillProcess(player));
     }
     public void SpRestore()
@@ -56,15 +56,15 @@ public class Player : Character
         if (sp < status.maxSP)
         {
             sp += spSpeed;
-            Debug.Log("���݂�sp��" + sp);
+            Debug.Log("現在のspは" + sp);
             if (sp == status.maxSP)
             {
                 almost = true;
             }
         }
-        if(almost)
+        if (almost)
         {
-            Debug.Log("sp����ɒB���܂���");
+            Debug.Log("sp上限に達しました");
             almost = false;
         }
     }
