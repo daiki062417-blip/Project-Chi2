@@ -19,6 +19,6 @@ public class SimpleMove : MonoBehaviour
 
 
         Vector3 move = new Vector3(x, 0, z);
-        transform.Translate(move * Time.deltaTime * 5f);
+        transform.Translate(move * Time.deltaTime * speed);
     }
 }
