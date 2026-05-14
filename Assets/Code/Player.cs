@@ -38,7 +38,11 @@ public class Player : Character
             yield return new WaitForSeconds(3f);
         }
     }
+<<<<<<< HEAD
     
+=======
+     
+>>>>>>> cb8d02c012950059acfc9d56523e0ac15f7ad1d8
 
     public void ActivatedSkill(SkillSlotManager.Button button)
     {
