@@ -6,20 +6,20 @@ public class test_Main : MonoBehaviour
 {
     
     [SerializeField] SkillSlotManager slotManager;
-    public SerializedDictionary<string, Player> playerDic = new();
 
 
     // Start is called before the first frame update
     void Start()
     {
         // セットアップ
-        //slotManager.SetUp();
+        slotManager.SetUp();
        
-        // プレイアブルキャラの初期化
-        foreach(var p in playerDic.Values)
-        {
-            p.SetUp();
-        }
+        
+        //// プレイアブルキャラの初期化 ( PlayerManager に移動予定)
+        //foreach(var p in playerDic.Values)
+        //{
+        //    p.SetUp();
+        //}
 
         // デバッグ用
         TestFunction();
@@ -29,9 +29,12 @@ public class test_Main : MonoBehaviour
     /// <summary>
     /// デバッグ用関数。コンフリクトしたら、自分の編集で上書きしていいよ
     /// </summary>
-    public Item item;
+    public Weapon weapon;
 
     void TestFunction()
     {
+        weapon.AddSubEffect(Weapon.Effect.enhanceCritical);
+        weapon.ShowWeaponInfo();
+        
     }
 }
