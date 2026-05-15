@@ -30,7 +30,6 @@ public class StatusManager : MonoBehaviour
         public float criticalRate;  // 会心率
         public float maxSP;  // 最大SP
         public int speed;   // 移動速度
-        public float luck;  // 運（仮）
         public Parameter.element element_defence; //防御の属性
     }
 
@@ -39,7 +38,7 @@ public class StatusManager : MonoBehaviour
     /// </summary>
     static readonly CongenialityRate cong_zero = new() { fire = 0, wind = 0, earth = 0, water = 0 };
     //--------------------------------
-    //              セットアップ処理
+    //        セットアップ処理
     //--------------------------------
 
 
@@ -75,7 +74,6 @@ public class StatusManager : MonoBehaviour
     /// <param name="criticalRate">会心率</param>
     /// <param name="maxSP">最大SP</param>
     /// <param name="speed">移動速度</param>
-    /// <param name="luck">運</param>
     /// <param name="element_defence">属性</param>
     /// <returns>ステータス構造体</returns>
     public static Status CreateStatus
@@ -87,7 +85,6 @@ public class StatusManager : MonoBehaviour
         float criticalRate = 0,
         float maxSP = 0,
         int speed = 0,
-        float luck = 0,
         //自属性の初期値は無属性
         Parameter.element element_defence = Parameter.element.normal
     )
@@ -101,7 +98,6 @@ public class StatusManager : MonoBehaviour
         newStatus.criticalRate = criticalRate;
         newStatus.maxSP = maxSP;
         newStatus.speed = speed;
-        newStatus.luck = luck;
         newStatus.element_defence = element_defence;
         Debug.Log("じつはmaxSPは、" + maxSP);
 
@@ -157,7 +153,6 @@ public class StatusManager : MonoBehaviour
             sumStatus.criticalRate += status.criticalRate;
             sumStatus.maxSP += status.maxSP;
             sumStatus.speed += status.speed;
-            sumStatus.luck += status.luck;
             sumStatus.congenialityRate = SumCongenialityRate(sumStatus.congenialityRate, status.congenialityRate);
             //属性の合算は無し
         }
@@ -191,7 +186,6 @@ public class StatusManager : MonoBehaviour
         showText += $"\n会心率 : {status.criticalRate}";
         showText += $"\n最大SP : {status.maxSP}";
         showText += $"\n移動速度 : {status.speed}";
-        showText += $"\n運 : {status.luck}";
         showText += $"\n倍率 : 下ログを参照";
 
         Debug.Log(showText);
