@@ -12,23 +12,19 @@ public class EnemyMove : Character
     private bool in_area = false;
 
     //操作キャラは変動するのでMainで用いている操作キャラを示す変数を利用した。もっといい方法はありますか
-    public PlayerManager Player;
+    public PlayerManager Main;
 
+    public float dis = 0;
     
     void Start()
     {
         //自身の座標情報
         ThisTransform = GetComponent<Transform>();
-
-        //操作キャラの情報を得るため
-        //Main = GameObject.Find("Main").GetComponent<ChangeMyChara>();
-
-
     }
 
     void Update()
     {
-        if (in_area = Player_In_Area(ThisTransform, Player.Playable().transform))
+        if (in_area = Player_In_Area(ThisTransform, Main.Playable().transform))
         {
             Debug.Log("敵の範囲内に入りました");
         }
@@ -39,7 +35,7 @@ public class EnemyMove : Character
     bool Player_In_Area(Transform enemy, Transform player)
     {
         //範囲は円形範囲で、半径はとりあえず仮で決めた。
-        float dis = Vector3.Distance(enemy.position, player.position);
+        dis = Vector3.Distance(enemy.position, player.position);
 
         //敵が攻撃をするのは範囲内
         if(dis < 5f)
