@@ -7,6 +7,7 @@ public class Item : ScriptableObject
 {
     [Header("ƒAƒCƒeƒ€ID")]
     public int ID;
+    public string itemName;
     public bool isConsumed;
 
     public virtual void Use(Player player)
