@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static StatusManager;
 
 [CreateAssetMenu(fileName = "weaponData", menuName = "ScriptableObjects/CreateWeapon")]
 public class Weapon : Item
@@ -24,13 +25,13 @@ public class Weapon : Item
     };
 
     // 武器のステータス
-    [SerializeField] StatusManager.Status status;
+    [SerializeField] Status status;
 
     // サブ効果の付与上限
     [SerializeField] int effectLimit;
 
     // メイン効果リスト
-    List<Effect> effectList;
+    [SerializeField] List<Effect> effectList;
 
     // サブ効果リスト
     List<Effect> subEffectList;
@@ -41,8 +42,9 @@ public class Weapon : Item
     //--------------------------------
 
     // 攻撃力の強化倍率
-    float powerRate = 0.05f;
-    float criticalRate = 0.05f;
+    // -メモ 増加量の記載。実際は「1 + 値」で計算される。
+    float enhancePowerRate = 0.05f;
+    float enhanceCriticalRate = 0.05f;
 
 
     //--------------------------------
@@ -113,20 +115,66 @@ public class Weapon : Item
         return nameList;
     }
 
+    /// <summary>
+    /// 武器のステータス（効果込）を返す。
+    /// </summary>
+    /// <returns>武器ステータス</returns>
+    public Status GetStatus()
+    {
+        return CalcEffect(status);
+    }
+   
 
-        //--------------------------------
-        //           内部処理
-        //--------------------------------
+    //--------------------------------
+    //           内部処理
+    //--------------------------------
 
-        /// <summary>
-        /// サブ効果に空きスロットがあるか判定
-        /// </summary>
-        /// <param name="subEffectList">サブ効果リスト</param>
-        /// <param name="effectLimit">サブ効果上限数</param>
-        /// <returns>判定</returns>
-        bool CheckEmptySlot(List<Effect> subEffectList, int effectLimit)
+    /// <summary>
+    /// サブ効果に空きスロットがあるか判定
+    /// </summary>
+    /// <param name="subEffectList">サブ効果リスト</param>
+    /// <param name="effectLimit">サブ効果上限数</param>
+    /// <returns>判定</returns>
+    bool CheckEmptySlot(List<Effect> subEffectList, int effectLimit)
     {
         return subEffectList.Count < effectLimit;
+    }
+
+
+    /// <summary>
+    /// 武器の効果を適用する
+    /// </summary>
+    /// <param name="status">武器ステータス</param>
+    /// <returns>効果適用後のステータス</returns>
+    Status CalcEffect(Status status)
+    {
+        // デバッグ用
+        Debug.Log("[Weapon] 効果適用");
+
+        // 全ての効果リストを作成
+        var allEffList = new List<Effect>(effectList);
+        allEffList.AddRange(subEffectList);
+
+        // 全効果を適用
+        foreach (var eff in allEffList)
+        {
+            switch (eff)
+            {
+                case Effect.enhancePower:
+                    status.power = Mathf.CeilToInt(status.power * (1 + enhancePowerRate) );
+                    break;
+
+                case Effect.enhanceCritical:
+                    // 100分率。小数切り上げ。
+                    status.criticalRate *= 1 + enhanceCriticalRate;
+                    Debug.Log("[Weapon] criticalRate（効果適用後）: " +  status.criticalRate);
+                    status.criticalRate = Mathf.Ceil(status.criticalRate * 100) / 100;
+                    break;
+            }
+
+        }
+
+        return status;
     }
 
 
@@ -159,12 +207,12 @@ public class Weapon : Item
             text += $"\n\t・{GetEffectName(eff)}";
         }
 
-        text += "\n武器ステータスは以下。";
+        text += "\n武器の基礎ステータスは以下。";
 
         Debug.Log(text);
 
         // 武器ステータス表示
-        StatusManager.ShowStatus(status);
+        ShowStatus(status);
 
     }
 

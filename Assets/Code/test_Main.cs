@@ -36,5 +36,7 @@ public class test_Main : MonoBehaviour
         weapon.AddSubEffect(Weapon.Effect.enhanceCritical);
         weapon.ShowWeaponInfo();
         
+        var weaponStatus = weapon.GetStatus();
+        StatusManager.ShowStatus(weaponStatus);
     }
 }
