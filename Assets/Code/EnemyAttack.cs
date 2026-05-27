@@ -11,47 +11,61 @@ public class EnemyAttack : MonoBehaviour
 
     //statusはどこで設定する？
     public StatusManager.Status status;
+    Player enemy;
 
     //技はとりあえず3種類は使えるようにした。個数の変更検討。
     private const int nubmer_of_skills = 3;
 
     //技の範囲はそれぞれ異なるため変更可能にする。
-    [SerializeField] float [] skill_area = new float[nubmer_of_skills];
-    //技のクールタイム
-    [SerializeField] float [] cooltime = new float[nubmer_of_skills];
-    //技
-    [SerializeField] ISkill[] skills = new ISkill[nubmer_of_skills];
+    [SerializeField] float [] skill_area = new float[nubmer_of_skills]
+        {1, 3, 10};
+
+    //技の範囲が狭い順にスキルを入れるようにしてほしい。
+    //[SerializeField] ISkill[] skills = new ISkill[nubmer_of_skills]
+
+    [SerializeField] test_skill[] skills = new test_skill [nubmer_of_skills];
 
     float dis;
 
+    bool can_use_skill;
+
     void Start()
     {
-        //enemy = GetComponent<Player>();
+        can_use_skill = true;
     }
     void Update()
     {
         dis = GetComponent<EnemyMove>().dis;
 
-        //スキル及びスキルの範囲は小さい順に設定してくれたらありがたい。
-        if (dis < skill_area[0])
-        {
-            StartCoroutine(Enemy_Attack(0));
-        }
-        else if (dis < skill_area[1])
-            { StartCoroutine(Enemy_Attack(1)); }
-        else
-        {
-            StartCoroutine(Enemy_Attack(2));
-        }
+        if(can_use_skill)
+        ChoiseSkill(dis, nubmer_of_skills);
     }
 
-    //クールタイムごとに技を繰り出す
-    IEnumerator Enemy_Attack
-        (int what_skill)
+    void ChoiseSkill(float dis, int n_skill)
     {
-        Debug.Log("Enemy Attacked" +  what_skill);
+        for (int i = 0; i < n_skill; i++)
+        {
+            if (skill_area[i] > dis)
+            {
+                //実際のスキルプロセスができるまでコメントアウト
+                //StartCoroutine(skills[i].SkillProcess(enemy));
 
-        yield return new WaitForSeconds(cooltime[what_skill]);
-        
+                Debug.Log("敵スキル" + i +
+                    "発動。クールタイム ： " + 3f);
+                StartCoroutine(CoolTimeCoroutine(3f));
+
+                break;
+            }
+        }
+        return;
+    }
+
+    IEnumerator CoolTimeCoroutine(float cooltime)
+    {
+        can_use_skill = false;
+
+        yield return new WaitForSeconds(cooltime);
+
+        can_use_skill = true;
     }
 }

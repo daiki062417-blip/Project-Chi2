@@ -7,12 +7,12 @@ public interface ISkill
     /// <summary>
     /// モーション名（形式変更の可能性あり）
     /// </summary>
-    public string motionName { get; }
+    public string MotionName { get; }
 
     /// <summary>
     /// 技係数。ダメージ計算時に参照
     /// </summary>
-    public float skillCoef { get; }
+    public float SkillCoef { get; }
 
     /// <summary>
     /// 消費SP
@@ -22,7 +22,12 @@ public interface ISkill
     /// <summary>
     /// 技アイコン
     /// </summary>
-    SpriteRenderer icon { get; }
+    SpriteRenderer Icon { get; }
+
+    /// <summary>
+    /// 技のクールタイム。敵の場合はこの時間中は他の技も打てない。
+    /// </summary>
+    public float Cooltime { get; }
 
     public IEnumerator SkillProcess(Player player);
 }
