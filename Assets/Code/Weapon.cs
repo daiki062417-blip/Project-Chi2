@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 using static StatusManager;
 
@@ -62,6 +63,16 @@ public class Weapon : Item
     //             API
     //--------------------------------
     
+
+    /// <summary>
+    ///　装備する。 
+    /// </summary>
+    /// <param name="player">装備するキャラ</param>
+    public override void Use(Player player)
+    {
+        player.weapon = this;
+    }
+
 
     /// <summary>
     /// サブ効果の追加

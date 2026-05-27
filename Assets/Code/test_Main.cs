@@ -30,13 +30,17 @@ public class test_Main : MonoBehaviour
     /// デバッグ用関数。コンフリクトしたら、自分の編集で上書きしていいよ
     /// </summary>
     public Weapon weapon;
+    public Player player;
 
     void TestFunction()
     {
+        if (weapon == null || player == null) { Debug.LogError("[test_Main] テスト用の変数が未定義"); return; }
+
         weapon.AddSubEffect(Weapon.Effect.enhanceCritical);
         weapon.ShowWeaponInfo();
+
+        weapon.Use(player); //装備
         
-        var weaponStatus = weapon.GetStatus();
-        StatusManager.ShowStatus(weaponStatus);
+        StatusManager.ShowStatus(StatusManager.PlayerTotalStatus(player));
     }
 }

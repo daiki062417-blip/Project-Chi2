@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,16 @@ public class Player : Character
     public StatusManager.Status status;
     bool almost;
 
+    public Weapon weapon;
+
 
     public void SetUp()
     {
         player = GetComponent<Player>();
 
         status = StatusManager.CreateStatus(
+            power: 3,
+            criticalRate: 0.1f,
             maxSP: 8
         );
         Debug.Log("maxSPは" + status.maxSP);
@@ -29,15 +34,9 @@ public class Player : Character
         StartCoroutine(SpRestoreCoroutine());
     }
 
-    IEnumerator SpRestoreCoroutine()
-    {
-        while (true)
-        {
-            SpRestore();
-
-            yield return new WaitForSeconds(3f);
-        }
-    }
+    //--------------------------------
+    //          スキル発動
+    //--------------------------------
 
 
     public void ActivatedSkill(SkillSlotManager.Button button)
@@ -51,6 +50,11 @@ public class Player : Character
         // 技発動
         StartCoroutine(skill.SkillProcess(player));
     }
+
+    //--------------------------------
+    //           SP回復
+    //--------------------------------
+
     public void SpRestore()
     {
         if (sp < status.maxSP)
@@ -66,6 +70,16 @@ public class Player : Character
         {
             Debug.Log("sp上限に達しました");
             almost = false;
+        }
+    }
+
+    IEnumerator SpRestoreCoroutine()
+    {
+        while (true)
+        {
+            SpRestore();
+
+            yield return new WaitForSeconds(3f);
         }
     }
 }
