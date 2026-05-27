@@ -39,7 +39,7 @@ public class SkillSlotManager : MonoBehaviour
         var slot = skillSlots[button];
         slot.mySkill = skill;
 
-        Debug.Log("[SkillSlotManager] SetSkill name : " + slot.mySkill.motionName);
+        Debug.Log("[SkillSlotManager] SetSkill name : " + slot.mySkill.MotionName);
 
         // アイコンセット処理
             //ここにアイコンセット処理を記述

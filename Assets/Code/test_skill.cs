@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class test_skill : MonoBehaviour, ISkill
 {
-    public string motionName { get; } = "testSkill";
-    public float skillCoef { get; } = 1.0f;
+    public string MotionName { get; } = "testSkill";
+    public float SkillCoef { get; } = 1.0f;
     public float SPCost { get; } = 1.0f;
-    public SpriteRenderer icon { get; }
+    public SpriteRenderer Icon { get; }
+    public float Cooltime { get; } = 3f;
 
 
     public IEnumerator SkillProcess(Player player)
