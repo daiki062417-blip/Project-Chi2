@@ -7,14 +7,13 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     //敵キャラも操作キャラと同じスキル管理で攻撃技を設計する
-    //SkillSlotManagerとPlayerのコード参考
 
     //statusはどこで設定する？
-    public StatusManager.Status status;
+    //public StatusManager.Status status;
     Player enemy;
 
     //技はとりあえず3種類は使えるようにした。個数の変更検討。
-    private const int nubmer_of_skills = 3;
+    const int nubmer_of_skills = 3;
 
     //技の範囲はそれぞれ異なるため変更可能にする。
     [SerializeField] float [] skill_area = new float[nubmer_of_skills]
@@ -27,7 +26,7 @@ public class EnemyAttack : MonoBehaviour
 
     float dis;
 
-    bool can_use_skill;
+    bool can_use_skill; //この敵キャラが現在クールタイム期間かどうか
 
     void Start()
     {
@@ -42,6 +41,9 @@ public class EnemyAttack : MonoBehaviour
     }
 
     void ChoiseSkill(float dis, int n_skill)
+        //dis：敵キャラと操作キャラ間距離
+        //n_skill：スキル数
+        //引数にする必要があるのか？
     {
         for (int i = 0; i < n_skill; i++)
         {
@@ -53,6 +55,7 @@ public class EnemyAttack : MonoBehaviour
                 Debug.Log("敵スキル" + i +
                     "発動。クールタイム ： " + 3f);
                 StartCoroutine(CoolTimeCoroutine(3f));
+                //StartCoroutine(CoolTimeCoroutine(skills[i].Cooltime));
 
                 break;
             }

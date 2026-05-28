@@ -13,23 +13,25 @@ public class Damage : MonoBehaviour
     ダメージ＝純粋ダメージ - 防御力＊定数
     会心ダメージ＝ダメージ＊（会心補正（会心率によって増加）＋武器会心補正　(会心失敗時は1)
     属性ダメージ = 会心ダメージ＊属性補正
-    最終ダメージ = 属性ダメージ＊乱数(｛運による値)｝%)
-    ※運：81~121ぐらい？
+    最終ダメージ = 属性ダメージ＊乱数(%)
     ・特殊な計算がある場合はそちらを優先。
      */
-    int damage(StatusManager.Status mystatus, StatusManager.Status enemystatus)
+    int MathDamage(StatusManager.Status mystatus, StatusManager.Status enemystatus)
     {
-        //仮で技係数をここで用意しているが、後から引数で参照されるようにする
+        //仮で技係数、防御定数、攻撃属性をここで用意しているが、後から引数で参照されるようにする
         float wazakeisu = 0.8f;
         float defence_constant = 0.8f;
+        Parameter.element element_attack = Parameter.element.normal;
 
         int d = (int)(mystatus.power * wazakeisu);
-        d -= (int)defence_constant * enemystatus.defense;
+
+        d -= (int)(enemystatus.defense * defence_constant);
+        
         //補正無しで会心ダメージ倍率は1.5倍で、会心率100％で倍率2.0倍（修正してよい）
         d = (int)(d * (1.5 + mystatus.criticalRate * 0.05));
 
         //属性によるダメージ乗算
-        d = CongenialityRateDamage(d, mystatus.element_defence, enemystatus.element_defence);
+        d = CongenialityRateDamage(d, element_attack, enemystatus.element_defence);
 
         //乱数によるダメージ変化をするかどうかは未定。
 
