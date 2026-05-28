@@ -160,6 +160,23 @@ public class StatusManager : MonoBehaviour
         return sumStatus;
     }
 
+    /// <summary>
+    /// プレイヤーの総ステータスを計算。武器やバフを考慮する。
+    /// </summary>
+    /// <param name="player">プレイヤー名</param>
+    /// <returns>総ステータス</returns>
+    public static Status PlayerTotalStatus(Player player)
+    {
+        Status totalStatus = new();
+
+        Status weaponStatus = player.weapon.GetStatus();
+
+        totalStatus = SumStatus(player.status, weaponStatus);
+
+        // バフの処理
+
+        return totalStatus;
+    }
     //--------------------------------
     //              表示
     //--------------------------------
