@@ -436,9 +436,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d809b70ad8bb6084d80af596f2e7a68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
-  ThisTransform: {fileID: 0}
-  Player: {fileID: 1354707534}
+  name: EnemyCube
+  ThisTransform: {fileID: 49140747}
+  Main: {fileID: 1354707534}
+  dis: 0
 --- !u!114 &49140749
 MonoBehaviour:
   m_ObjectHideFlags: 0
