@@ -12,45 +12,42 @@ public class EnemyMove : Character
     private bool in_area = false;
 
     //操作キャラは変動するのでMainで用いている操作キャラを示す変数を利用した。もっといい方法はありますか
-    public PlayerManager Player;
+    public PlayerManager Main;
 
+    public float dis = 0;
     
     void Start()
     {
         //自身の座標情報
         ThisTransform = GetComponent<Transform>();
-
-        //操作キャラの情報を得るため
-        //Main = GameObject.Find("Main").GetComponent<ChangeMyChara>();
-
-
     }
 
     void Update()
     {
-        if (in_area = Player_In_Area(ThisTransform, Player.Playable().transform))
+        if (in_area = MoveToTarget(ThisTransform, Main.Playable().transform, 5f, 1f))
         {
-            Debug.Log("敵の範囲内に入りました");
+            //Debug.Log("敵の範囲内に入りました");
         }
 
         //
     }
 
-    bool Player_In_Area(Transform enemy, Transform player)
+    bool MoveToTarget(Transform me, Transform target, float search_dis, float enough_dis)
     {
         //範囲は円形範囲で、半径はとりあえず仮で決めた。
-        float dis = Vector3.Distance(enemy.position, player.position);
+        dis = Vector3.Distance(me.position, target.position);
 
-        //敵が攻撃をするのは範囲内
-        if(dis < 5f)
+        //敵が攻撃をするのは範囲内(search_dis は索敵範囲)
+        if(dis < search_dis)
         {
             //敵が移動するのは範囲内であるときだが、一定まで近づけば移動しなくていい
-            if (dis > 1f)
+            //enough_disは対象に移動するまでのノルマ
+            if (dis > enough_dis)
             {
                 //とりあえずスピードは１ｆにしている操作キャラに向かうベクトルを元に座標を代入
                 //現時点では直線的、単調に向かっていくだけなのでご了承ください
-                enemy.position =
-                    Vector3.MoveTowards(enemy.position, player.position, 1f * Time.deltaTime);
+                me.position =
+                    Vector3.MoveTowards(me.position, target.position, 1f * Time.deltaTime);
             }
             return true;
         }
