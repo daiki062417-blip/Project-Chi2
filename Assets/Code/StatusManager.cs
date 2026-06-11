@@ -210,6 +210,16 @@ public class StatusManager : MonoBehaviour
         ShowCongenialityRate(status.congenialityRate);
     }
 
+    [System.Serializable]
+    public struct LevelUpData
+    {
+        public int HP;
+        public int power;
+        public int defense;
+        public float maxSP;
+        public int speed;
+        public float criticalRate;
+    }
 
 }
 

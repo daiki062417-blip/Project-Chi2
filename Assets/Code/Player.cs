@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +8,14 @@ public class Player : Character
     Player player;
     float sp = 0;
     [SerializeField] float spSpeed;
-    public StatusManager.Status status;
+
+    [Header("レベルアップ時の上昇量")]
+    [SerializeField]
+    List<StatusManager.LevelUpData> levelUpTable = new();
+
     bool almost;
+    int level = 1;
+    int current_level = 1;
 
     public Weapon weapon;
 
@@ -20,8 +25,6 @@ public class Player : Character
         player = GetComponent<Player>();
 
         status = StatusManager.CreateStatus(
-            power: 3,
-            criticalRate: 0.1f,
             maxSP: 8
         );
         Debug.Log("maxSPは" + status.maxSP);
@@ -34,9 +37,15 @@ public class Player : Character
         StartCoroutine(SpRestoreCoroutine());
     }
 
-    //--------------------------------
-    //          スキル発動
-    //--------------------------------
+    IEnumerator SpRestoreCoroutine()
+    {
+        while (true)
+        {
+            SpRestore();
+
+            yield return new WaitForSeconds(3f);
+        }
+    }
 
 
     public void ActivatedSkill(SkillSlotManager.Button button)
@@ -50,11 +59,6 @@ public class Player : Character
         // 技発動
         StartCoroutine(skill.SkillProcess(player));
     }
-
-    //--------------------------------
-    //           SP回復
-    //--------------------------------
-
     public void SpRestore()
     {
         if (sp < status.maxSP)
@@ -73,13 +77,39 @@ public class Player : Character
         }
     }
 
-    IEnumerator SpRestoreCoroutine()
+    public void GrowingCharacter()
     {
-        while (true)
+        while (current_level < level)
         {
-            SpRestore();
+            int tableIndex = current_level - 1;
 
-            yield return new WaitForSeconds(3f);
+            if (tableIndex < levelUpTable.Count)
+            {
+                var growth = levelUpTable[tableIndex];
+
+                status = StatusManager.SumStatus(
+                    status,
+                    StatusManager.CreateStatus(
+                        HP: growth.HP,
+                        power: growth.power,
+                        defense: growth.defense,
+                        criticalRate: growth.criticalRate,
+                        maxSP: growth.maxSP,
+                        speed: growth.speed
+                    )
+                );
+            }
+
+            current_level++;
         }
+    }
+    public void LevelUp()
+    {
+        level++;
+
+        GrowingCharacter();
+
+        Debug.Log($"Lv.{level}になった！");
+        StatusManager.ShowStatus(status);
     }
 }

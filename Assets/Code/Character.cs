@@ -6,5 +6,5 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] string name;
-    StatusManager.Status status;
+    public StatusManager.Status status;
 }
