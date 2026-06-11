@@ -8,10 +8,14 @@ public class Player : Character
     Player player;
     float sp = 0;
     [SerializeField] float spSpeed;
-    public StatusManager.Status status;
+
+    [Header("レベルアップ時の上昇量")]
+    [SerializeField]
+    List<StatusManager.LevelUpData> levelUpTable = new();
+
     bool almost;
-    int level;
-    int current_level;
+    int level = 1;
+    int current_level = 1;
 
     public Weapon weapon;
 
@@ -75,11 +79,37 @@ public class Player : Character
 
     public void GrowingCharacter()
     {
-        
-        if (level > current_level)
+        while (current_level < level)
         {
+            int tableIndex = current_level - 1;
 
+            if (tableIndex < levelUpTable.Count)
+            {
+                var growth = levelUpTable[tableIndex];
+
+                status = StatusManager.SumStatus(
+                    status,
+                    StatusManager.CreateStatus(
+                        HP: growth.HP,
+                        power: growth.power,
+                        defense: growth.defense,
+                        criticalRate: growth.criticalRate,
+                        maxSP: growth.maxSP,
+                        speed: growth.speed
+                    )
+                );
+            }
+
+            current_level++;
         }
     }
+    public void LevelUp()
+    {
+        level++;
 
+        GrowingCharacter();
+
+        Debug.Log($"Lv.{level}になった！");
+        StatusManager.ShowStatus(status);
+    }
 }
