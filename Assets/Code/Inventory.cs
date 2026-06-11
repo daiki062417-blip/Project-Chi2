@@ -13,7 +13,17 @@ public class Inventory : MonoBehaviour
     }
 
     List<InventoryElement> itemList = new();
+    Dictionary<GameObject, Item> showItemList = new(); // 表示しているアイテムを格納
 
+    // ---------------------------------------------------------
+    //                     アイテム管理  
+    // ---------------------------------------------------------
+
+    /// <summary>
+    /// アイテムをインベントリに追加
+    /// </summary>
+    /// <param name="item">追加アイテム</param>
+    /// <param name="num">個数</param>
     public void AddItem(Item item, int num)
     {
         
@@ -79,6 +89,9 @@ public class Inventory : MonoBehaviour
         Debug_InventoryContent();
     }
 
+    // ---------------------------------------------------------
+    //                           探索 
+    // ---------------------------------------------------------
 
     /// <summary>
     /// 指定アイテムのインデックスを返す
@@ -98,6 +111,41 @@ public class Inventory : MonoBehaviour
     {
         itemList.Sort((target1, target2) => target2.item.ID - target1.item.ID);
     }
+
+    // ---------------------------------------------------------
+    //                           表示用  
+    // ---------------------------------------------------------
+
+    /// <summary>
+    /// アイテムを表示する。※未テスト。使いにくければ無視してくれ！
+    /// </summary>
+    /// <param name="item">表示するアイテム</param>
+    /// <param name="pos"></param>
+    GameObject ShowItem(Item item, Vector3 pos)
+    {
+        var itemObj = new GameObject();
+        itemObj.name = item.name;
+        itemObj.transform.position = pos;
+        itemObj.AddComponent<SpriteRenderer>().sprite = item.icon;
+
+        showItemList.Add(itemObj, item);
+        return itemObj;
+    }
+
+    /// <summary>
+    /// 表示用オブジェクトのアイテム情報を取得
+    /// </summary>
+    /// <param name="itemObj">表示用オブジェクト</param>
+    /// <returns>そのオブジェクトに対応したアイテム</returns>
+    Item ItemObj2Info(GameObject itemObj)
+    {
+        return showItemList[itemObj];
+    }
+
+    // ---------------------------------------------------------
+    //                         デバッグ用 
+    // ---------------------------------------------------------
+
 
     void Debug_InventoryContent()
     {

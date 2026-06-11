@@ -8,7 +8,9 @@ public class Item : ScriptableObject
     [Header("アイテムID")]
     public int ID;
     public string itemName;
+    public List<string> tagList; // 商品のカテゴリ
     public bool isConsumed;
+    public Sprite icon;
 
     public virtual void Use(Player player)
     {
