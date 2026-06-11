@@ -94,6 +94,26 @@ public class Inventory : MonoBehaviour
     // ---------------------------------------------------------
 
     /// <summary>
+    /// 指定アイテムを所持しているか判定する。
+    /// </summary>
+    /// <param name="item">指定アイテム</param>
+    /// <param name="num">指定個数</param>
+    /// <returns>判定</returns>
+    public bool HaveItem(Item item, int num)
+    {
+        // 指定アイテムのデータを取得
+        var index = FindItemIndex(item);
+
+        // 所持数を確認
+        if (index >= 0)
+        {
+            return num > itemList[index].num;
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// 指定アイテムのインデックスを返す
     /// </summary>
     /// <param name="item">アイテム</param>
@@ -115,6 +135,7 @@ public class Inventory : MonoBehaviour
     // ---------------------------------------------------------
     //                           表示用  
     // ---------------------------------------------------------
+
 
     /// <summary>
     /// アイテムを表示する。※未テスト。使いにくければ無視してくれ！
