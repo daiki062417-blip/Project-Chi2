@@ -19,12 +19,7 @@ public class ScenarioManager : MonoBehaviour
     {
         
     }
-
-<<<<<<< HEAD:Assets/Code/SenarioManager.cs
     bool ObserveFlag()
-=======
-    bool  ObserveFlag()
->>>>>>> a157af78a16cd74328fb2ad4bd795b406149ebd8:Assets/Code/ScenarioManager.cs
     {
         return true;
     }

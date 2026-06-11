@@ -8,7 +8,7 @@ public class MenuUI : MonoBehaviour
     public GameObject menuPanel;
     //public GameObject openPanel;
 
-    public void OpenMinu()
+    public void OpenMenu()
     {
         ToggleMenu();
     }
