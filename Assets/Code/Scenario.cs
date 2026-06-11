@@ -12,15 +12,16 @@ public class Scenario : ScriptableObject
     /// <summary>
     /// シナリオ開始フラグ。設定したすべての条件が合致すればシナリオをロード 
     /// </summary>
-    [Serializable] public struct SenarioFlag
+    [Serializable] public struct ScenarioFlag
     {
-        Collider PosColliderName;   // プレイヤー位置。コライダーを設置し、それがプレイヤーを検知したか判定する。
-        Scenario premiseScenario;   // 前提シナリオ
-        Quest premiseQuest;         // 前提クエスト
-        SerializedDictionary<Item, int> keyItem;    // キーアイテム。これを持っているとシナリオ実行（消費しない）
+        public CharaDetecter posDetecter;   // プレイヤー位置。コライダーを設置し、それがプレイヤーを検知したか判定する。
+        public Player detectedPlayer;   //上コライダーにおいて、検出するキャラを制限する。（指定なしなら全員対象）
+        public Scenario premiseScenario;   // 前提シナリオ
+        public Quest premiseQuest;         // 前提クエスト
+        public SerializedDictionary<Item, int> keyItems;    // キーアイテム。これを持っているとシナリオ実行（消費しない）
     }
 
-    [SerializeField] SenarioFlag flag;
+    [SerializeField] ScenarioFlag flag;
 
 
     /// <summary>
@@ -28,9 +29,9 @@ public class Scenario : ScriptableObject
     /// </summary>
     [Serializable] public struct Format
     {
-        VideoPlayer movie;      // ムービーを再生
-        string scenarioScene;   // シナリオを別シーンで再生
-        string csv;     // 吹き出し型の会話。会話データをcsvで管理したいが、形式や導入するか未定のため保留。
+        public VideoPlayer movie;      // ムービーを再生
+        public string scenarioScene;   // シナリオを別シーンで再生
+        public string csv;     // 吹き出し型の会話。会話データをcsvで管理したいが、形式や導入するか未定のため保留。
     }
 
     [SerializeField] Format format;
@@ -41,10 +42,12 @@ public class Scenario : ScriptableObject
     /// </summary>
     [Serializable] struct FinishEvent
     {
-        SerializedDictionary<Enemy, Vector3> appearEnemyDic;
-        Dictionary<Item, int> getItemDic;
-        Quest clearQuest;
+        public SerializedDictionary<Enemy, Vector3> appearEnemyDic;
+        public Dictionary<Item, int> getItemDic;
+        public Quest clearQuest;
     }
 
     [SerializeField] FinishEvent finishEvent;
+
+    public bool isFinished = false;
 }

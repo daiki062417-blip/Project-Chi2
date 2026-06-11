@@ -4,23 +4,53 @@ using UnityEngine;
 
 
 /// <summary>
-/// ƒVƒiƒŠƒI‚Ìƒtƒ‰ƒOŠÄ‹Aƒ[ƒhAI—¹Œã‚Ìˆ—‚ğs‚¤ƒNƒ‰ƒXB
+/// ï¿½Vï¿½iï¿½ï¿½ï¿½Iï¿½Ìƒtï¿½ï¿½ï¿½Oï¿½Äï¿½ï¿½Aï¿½ï¿½ï¿½[ï¿½hï¿½Aï¿½Iï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½B
 /// </summary>
 public class ScenarioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Inventory inventory;
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// ï¿½Vï¿½iï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½Oï¿½ÌŠÄï¿½
+    /// </summary>
+    /// <param name="flag">ï¿½Vï¿½iï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O</param>
+    /// <returns>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚©</returns>
+    public bool  ObserveFlag(Scenario.ScenarioFlag flag)    // ï¿½eï¿½Xï¿½gï¿½pï¿½ï¿½publicï¿½É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½B
     {
-        
-    }
-    bool ObserveFlag()
-    {
-        return true;
+        // ï¿½ï¿½ï¿½èŒ‹ï¿½ï¿½
+        var result = true;
+
+        // ï¿½wï¿½ï¿½Ê’uï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½É”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
+        if(flag.posDetecter != null)
+        {
+            // ï¿½wï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Æˆï¿½vï¿½ï¿½ï¿½é‚©
+            if (flag.detectedPlayer != null && flag.posDetecter.DetectPlayer() != flag.detectedPlayer)
+                result = false;
+        }
+
+        // ï¿½Oï¿½ï¿½Vï¿½iï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if(flag.premiseScenario != null)
+        {
+            if(!flag.premiseScenario.isFinished)
+                result = false;
+        }
+
+        if(flag.premiseQuest != null)
+        {
+            if(flag.premiseQuest.isFinished)
+                result = false;
+        }
+
+        if(flag.keyItems != null)
+        {
+            foreach(var pair in flag.keyItems)
+                if (!inventory.HaveItem(pair.Key, pair.Value))
+                {
+                    result = false;
+                    break;
+                }
+        }
+
+        return false;
     }
 }
