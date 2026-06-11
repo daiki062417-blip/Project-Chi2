@@ -20,5 +20,8 @@ public class SenarioManager : MonoBehaviour
         
     }
 
-    bool  ObserveFlag()
+    bool ObserveFlag()
+    {
+        return true;
+    }
 }
